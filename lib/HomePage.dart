@@ -103,45 +103,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    _seriesPieData.add(
-      charts.Series(
-        domainFn: (Task task, _) => task.task,
-        measureFn: (Task task, _) => task.taskvalue,
-        colorFn: (Task task, _) =>
-            charts.ColorUtil.fromDartColor(task.colorval),
-        id: 'Air Pollution',
-        data: piedata,
-         labelAccessorFn: (Task row, _) => '${row.taskvalue}',
-      ),
-    );
-
-    _seriesLineData.add(
-      charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff990099)),
-        id: 'Air Pollution',
-        data: linesalesdata,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
-      ),
-    );
-    _seriesLineData.add(
-      charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff109618)),
-        id: 'Air Pollution',
-        data: linesalesdata1,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
-      ),
-    );
-    _seriesLineData.add(
-      charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffff9900)),
-        id: 'Air Pollution',
-        data: linesalesdata2,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
-      ),
-    );
+  
   }
 
   @override
