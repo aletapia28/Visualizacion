@@ -13,7 +13,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<charts.Series<Pollution, String>> _seriesData;
-
+  List<charts.Series<Task, String>> _seriesPieData;
+  List<charts.Series<Sales, int>> _seriesLineData;
 
   _generateData() {
     var data1 = [
@@ -103,7 +104,45 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-  
+    _seriesPieData.add(
+      charts.Series(
+        domainFn: (Task task, _) => task.task,
+        measureFn: (Task task, _) => task.taskvalue,
+        colorFn: (Task task, _) =>
+            charts.ColorUtil.fromDartColor(task.colorval),
+        id: 'Air Pollution',
+        data: piedata,
+         labelAccessorFn: (Task row, _) => '${row.taskvalue}',
+      ),
+    );
+
+    _seriesLineData.add(
+      charts.Series(
+        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff990099)),
+        id: 'Air Pollution',
+        data: linesalesdata,
+        domainFn: (Sales sales, _) => sales.yearval,
+        measureFn: (Sales sales, _) => sales.salesval,
+      ),
+    );
+    _seriesLineData.add(
+      charts.Series(
+        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff109618)),
+        id: 'Air Pollution',
+        data: linesalesdata1,
+        domainFn: (Sales sales, _) => sales.yearval,
+        measureFn: (Sales sales, _) => sales.salesval,
+      ),
+    );
+    _seriesLineData.add(
+      charts.Series(
+        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffff9900)),
+        id: 'Air Pollution',
+        data: linesalesdata2,
+        domainFn: (Sales sales, _) => sales.yearval,
+        measureFn: (Sales sales, _) => sales.salesval,
+      ),
+    );
   }
 
   @override
@@ -111,7 +150,8 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     _seriesData = List<charts.Series<Pollution, String>>();
-
+    _seriesPieData = List<charts.Series<Task, String>>();
+    _seriesLineData = List<charts.Series<Sales, int>>();
     _generateData();
   }
 
@@ -119,7 +159,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 1,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Color(0xff1976d2),
@@ -153,6 +193,78 @@ class _HomePageState extends State<HomePage> {
                             barGroupingType: charts.BarGroupingType.grouped,
                             //behaviors: [new charts.SeriesLegend()],
                             animationDuration: Duration(seconds: 5),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Container(
+                  child: Center(
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                            'Time spent on daily tasks',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
+                            SizedBox(height: 10.0,),
+                        Expanded(
+                          child: charts.PieChart(
+                            _seriesPieData,
+                            animate: true,
+                            animationDuration: Duration(seconds: 5),
+                             behaviors: [
+                            new charts.DatumLegend(
+                              outsideJustification: charts.OutsideJustification.endDrawArea,
+                              horizontalFirst: false,
+                              desiredMaxRows: 2,
+                              cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
+                              entryTextStyle: charts.TextStyleSpec(
+                                  color: charts.MaterialPalette.purple.shadeDefault,
+                                  fontFamily: 'Georgia',
+                                  fontSize: 11),
+                            )
+                          ],
+                           defaultRenderer: new charts.ArcRendererConfig(
+                              arcWidth: 100,
+                             arcRendererDecorators: [
+          new charts.ArcLabelDecorator(
+              labelPosition: charts.ArcLabelPosition.inside)
+        ])),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Container(
+                  child: Center(
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                            'Sales for the first 5 years',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
+                        Expanded(
+                          child: charts.LineChart(
+                            _seriesLineData,
+                            defaultRenderer: new charts.LineRendererConfig(
+                                includeArea: true, stacked: true),
+                            animate: true,
+                            animationDuration: Duration(seconds: 5),
+                            behaviors: [
+        new charts.ChartTitle('Years',
+            behaviorPosition: charts.BehaviorPosition.bottom,
+            titleOutsideJustification:charts.OutsideJustification.middleDrawArea),
+        new charts.ChartTitle('Sales',
+            behaviorPosition: charts.BehaviorPosition.start,
+            titleOutsideJustification: charts.OutsideJustification.middleDrawArea),
+        new charts.ChartTitle('Departments',
+            behaviorPosition: charts.BehaviorPosition.end,
+            titleOutsideJustification:charts.OutsideJustification.middleDrawArea,
+            )   
+      ]
                           ),
                         ),
                       ],
