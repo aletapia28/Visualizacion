@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import 'homepage.dart';
-
+import 'HomePage.dart';
 
 void main() => runApp(App());
-
+ 
 class App extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Visualizacion de la informacion',
+      debugShowCheckedModeBanner: true,
+      title: 'Visualizacion de la informacion ',
       theme: ThemeData(
-        primaryColor: Color(0xffff6101),
+        primaryColor: Colors.red,
       ),
       home: HomePage(),
     );
   }
 }
+
+
+
+
