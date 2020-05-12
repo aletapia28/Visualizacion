@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                 child: Center(
                   child: Column(
                     children: <Widget>[
-                      Text("data"),
+                      Text("Grafico de Burbujas",style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
                       Expanded(
                           child: charts.ScatterPlotChart(
                         _createSampleData(),
@@ -122,17 +122,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-            ),
-
-            
+            ),        
             Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Container(
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        Text(
-                            'SO₂ emissions, by world region (in million tonnes)',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
+                        Text('Grafico de barras',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),
+                        ),
                         Expanded(
                           child: charts.BarChart(
                             _seriesData,
