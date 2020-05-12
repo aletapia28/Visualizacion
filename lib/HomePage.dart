@@ -1,8 +1,6 @@
-  
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 class HomePage extends StatefulWidget {
   final Widget child;
 
@@ -12,85 +10,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<charts.Series<Pollution, String>> _seriesData;
-  List<charts.Series<Task, String>> _seriesPieData;
-  List<charts.Series<Sales, int>> _seriesLineData;
+  List  _seriesData = List<charts.Series<Pollution, String>>();
 
-  _generateData() {
-    var data1 = [
-      new Pollution(1980, 'USA', 30),
-      new Pollution(1980, 'Asia', 40),
-      new Pollution(1980, 'Europe', 10),
-    ];
-    var data2 = [
-      new Pollution(1985, 'USA', 100),
-      new Pollution(1980, 'Asia', 150),
-      new Pollution(1985, 'Europe', 80),
-    ];
-    var data3 = [
-      new Pollution(1985, 'USA', 200),
+    _generateData(){
+      var data3 = [
+      new Pollution(1985, 'USAFFF', 200),
       new Pollution(1980, 'Asia', 300),
       new Pollution(1985, 'Europe', 180),
     ];
-
-    var piedata = [
-      new Task('Work', 35.8, Color(0xff3366cc)),
-      new Task('Eat', 8.3, Color(0xff990099)),
-      new Task('Commute', 10.8, Color(0xff109618)),
-      new Task('TV', 15.6, Color(0xfffdbe19)),
-      new Task('Sleep', 19.2, Color(0xffff9900)),
-      new Task('Other', 10.3, Color(0xffdc3912)),
-    ];
-
-    var linesalesdata = [
-      new Sales(0, 45),
-      new Sales(1, 56),
-      new Sales(2, 55),
-      new Sales(3, 60),
-      new Sales(4, 61),
-      new Sales(5, 70),
-    ];
-    var linesalesdata1 = [
-      new Sales(0, 35),
-      new Sales(1, 46),
-      new Sales(2, 45),
-      new Sales(3, 50),
-      new Sales(4, 51),
-      new Sales(5, 60),
-    ];
-
-    var linesalesdata2 = [
-      new Sales(0, 20),
-      new Sales(1, 24),
-      new Sales(2, 25),
-      new Sales(3, 40),
-      new Sales(4, 45),
-      new Sales(5, 60),
-    ];
-
-    _seriesData.add(
-      charts.Series(
-        domainFn: (Pollution pollution, _) => pollution.place,
-        measureFn: (Pollution pollution, _) => pollution.quantity,
-        id: '2017',
-        data: data1,
-        fillPatternFn: (_, __) => charts.FillPatternType.solid,
-        fillColorFn: (Pollution pollution, _) =>
-            charts.ColorUtil.fromDartColor(Color(0xff990099)),
-      ), 
-    );
-
-    _seriesData.add(
-      charts.Series(
-        domainFn: (Pollution pollution, _) => pollution.place,
-        measureFn: (Pollution pollution, _) => pollution.quantity,
-        id: '2018',
-        data: data2,
-        fillPatternFn: (_, __) => charts.FillPatternType.solid,
-        fillColorFn: (Pollution pollution, _) =>
-           charts.ColorUtil.fromDartColor(Color(0xff109618)),
-      ),
-    );
 
     _seriesData.add(
       charts.Series(
@@ -99,70 +26,76 @@ class _HomePageState extends State<HomePage> {
         id: '2019',
         data: data3,
         fillPatternFn: (_, __) => charts.FillPatternType.solid,
-       fillColorFn: (Pollution pollution, _) =>
-          charts.ColorUtil.fromDartColor(Color(0xffff9900)),
+        fillColorFn: (Pollution pollution, _) =>
+            charts.ColorUtil.fromDartColor(Color(0xffff9900)),
       ),
-    );
+     );
+    }
 
-    _seriesPieData.add(
-      charts.Series(
-        domainFn: (Task task, _) => task.task,
-        measureFn: (Task task, _) => task.taskvalue,
-        colorFn: (Task task, _) =>
-            charts.ColorUtil.fromDartColor(task.colorval),
-        id: 'Air Pollution',
-        data: piedata,
-         labelAccessorFn: (Task row, _) => '${row.taskvalue}',
-      ),
-    );
+ static List<charts.Series<LinearSales, int>> _createSampleData() {
+    final data = [
+      new LinearSales(0, 5, 3.0),
+      new LinearSales(10, 25, 5.0),
+      new LinearSales(12, 75, 4.0),
+      new LinearSales(13, 225, 5.0),
+      new LinearSales(16, 50, 4.0),
+      new LinearSales(24, 75, 3.0),
+      new LinearSales(25, 100, 3.0),
+      new LinearSales(34, 150, 5.0),
+      new LinearSales(37, 10, 4.5),
+      new LinearSales(45, 300, 8.0),
+      new LinearSales(52, 15, 4.0),
+      new LinearSales(56, 200, 7.0),
+    ];
 
-    _seriesLineData.add(
-      charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff990099)),
-        id: 'Air Pollution',
-        data: linesalesdata,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
-      ),
-    );
-    _seriesLineData.add(
-      charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff109618)),
-        id: 'Air Pollution',
-        data: linesalesdata1,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
-      ),
-    );
-    _seriesLineData.add(
-      charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffff9900)),
-        id: 'Air Pollution',
-        data: linesalesdata2,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
-      ),
-    );
+    final maxMeasure = 300;
+
+    return [
+      new charts.Series<LinearSales, int>(
+        id: 'Sales',
+        // Providing a color function is optional.
+        colorFn: (LinearSales sales, _) {
+          // Bucket the measure column value into 3 distinct colors.
+          final bucket = sales.sales / maxMeasure;
+
+          if (bucket < 1 / 3) {
+            return charts.MaterialPalette.blue.shadeDefault;
+          } else if (bucket < 2 / 3) {
+            return charts.MaterialPalette.red.shadeDefault;
+          } else {
+            return charts.MaterialPalette.green.shadeDefault;
+          }
+        },
+        domainFn: (LinearSales sales, _) => sales.year,
+        measureFn: (LinearSales sales, _) => sales.sales,
+        // Providing a radius function is optional.
+        radiusPxFn: (LinearSales sales, _) => sales.radius,
+        data: data,
+      )
+    ];
   }
+
+
+  
+
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     _seriesData = List<charts.Series<Pollution, String>>();
-    _seriesPieData = List<charts.Series<Task, String>>();
-    _seriesLineData = List<charts.Series<Sales, int>>();
+
     _generateData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+   return MaterialApp(
       home: DefaultTabController(
-        length: 3,
+        length: 1,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff1976d2),
+            backgroundColor: Colors.redAccent,
             //backgroundColor: Color(0xff308e1c),
             bottom: TabBar(
               indicatorColor: Color(0xff9962D0),
@@ -170,114 +103,56 @@ class _HomePageState extends State<HomePage> {
                 Tab(
                   icon: Icon(FontAwesomeIcons.solidChartBar),
                 ),
-                Tab(icon: Icon(FontAwesomeIcons.chartPie)),
-                Tab(icon: Icon(FontAwesomeIcons.chartLine)),
               ],
             ),
-            title: Text('Flutter Charts'),
+            title: Text('Grafico de burbuja'),            
           ),
-          body: TabBarView(
+          body: 
+          TabBarView(
             children: [
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8),
                 child: Container(
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        Text(
-                            'SO₂ emissions, by world region (in million tonnes)',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
+                        Text("data"
+                        ),
+
                         Expanded(
-                          child: charts.BarChart(
-                            _seriesData,
+                          child: charts.ScatterPlotChart(
+                            _createSampleData(),
                             animate: true,
-                            barGroupingType: charts.BarGroupingType.grouped,
-                            //behaviors: [new charts.SeriesLegend()],
-                            animationDuration: Duration(seconds: 5),
+                            // barGroupingType: charts.BarGroupingType.grouped,
+                          )
                           ),
+
+                    ],
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Container(
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                            'Time spent on daily tasks',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
-                            SizedBox(height: 10.0,),
-                        Expanded(
-                          child: charts.PieChart(
-                            _seriesPieData,
-                            animate: true,
-                            animationDuration: Duration(seconds: 5),
-                             behaviors: [
-                            new charts.DatumLegend(
-                              outsideJustification: charts.OutsideJustification.endDrawArea,
-                              horizontalFirst: false,
-                              desiredMaxRows: 2,
-                              cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
-                              entryTextStyle: charts.TextStyleSpec(
-                                  color: charts.MaterialPalette.purple.shadeDefault,
-                                  fontFamily: 'Georgia',
-                                  fontSize: 11),
-                            )
-                          ],
-                           defaultRenderer: new charts.ArcRendererConfig(
-                              arcWidth: 100,
-                             arcRendererDecorators: [
-          new charts.ArcLabelDecorator(
-              labelPosition: charts.ArcLabelPosition.inside)
-        ])),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Container(
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                            'Sales for the first 5 years',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
-                        Expanded(
-                          child: charts.LineChart(
-                            _seriesLineData,
-                            defaultRenderer: new charts.LineRendererConfig(
-                                includeArea: true, stacked: true),
-                            animate: true,
-                            animationDuration: Duration(seconds: 5),
-                            behaviors: [
-        new charts.ChartTitle('Years',
-            behaviorPosition: charts.BehaviorPosition.bottom,
-            titleOutsideJustification:charts.OutsideJustification.middleDrawArea),
-        new charts.ChartTitle('Sales',
-            behaviorPosition: charts.BehaviorPosition.start,
-            titleOutsideJustification: charts.OutsideJustification.middleDrawArea),
-        new charts.ChartTitle('Departments',
-            behaviorPosition: charts.BehaviorPosition.end,
-            titleOutsideJustification:charts.OutsideJustification.middleDrawArea,
-            )   
-      ]
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+                  ) ,),)
+            ]
+            )
         ),
-      ),
+    )
     );
   }
+}
+
+
+class LinearSales {
+  final int year;
+  final int sales;
+  final double radius;
+
+  LinearSales(this.year, this.sales, this.radius);
+}
+
+class Poblacion {
+  String rango;
+  String condicion;
+  int cantidad;
+
+  Poblacion(this.rango, this.condicion, this.cantidad);
 }
 
 class Pollution {
@@ -287,19 +162,3 @@ class Pollution {
 
   Pollution(this.year, this.place, this.quantity);
 }
-
-class Task {
-  String task;
-  double taskvalue;
-  Color colorval;
-
-  Task(this.task, this.taskvalue, this.colorval);
-}
-
-class Sales {
-  int yearval;
-  int salesval;
-
-  Sales(this.yearval, this.salesval);
-}
-
