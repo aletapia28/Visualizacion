@@ -12,12 +12,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List _seriesData = List<charts.Series<Pollution, String>>();
+   List<charts.Series<Task, String>> _seriesPieData;
 
   _generateData() {
     var data3 = [
       new Pollution(1985, 'USAFFF', 200),
       new Pollution(1980, 'Asia', 300),
       new Pollution(1985, 'Europe', 180),
+    ];
+      var piedata = [
+      new Task('Work', 35.8, Color(0xff3366cc)),
+      new Task('Eat', 8.3, Color(0xff990099)),
+      new Task('Commute', 10.8, Color(0xff109618)),
+      new Task('TV', 15.6, Color(0xfffdbe19)),
+      new Task('Sleep', 19.2, Color(0xffff9900)),
+      new Task('Other', 10.3, Color(0xffdc3912)),
     ];
 
     _seriesData.add(
@@ -29,6 +38,18 @@ class _HomePageState extends State<HomePage> {
         fillPatternFn: (_, __) => charts.FillPatternType.solid,
         fillColorFn: (Pollution pollution, _) =>
             charts.ColorUtil.fromDartColor(Color(0xffff9900)),
+      ),
+    );
+
+        _seriesPieData.add(
+      charts.Series(
+        domainFn: (Task task, _) => task.task,
+        measureFn: (Task task, _) => task.taskvalue,
+        colorFn: (Task task, _) =>
+            charts.ColorUtil.fromDartColor(task.colorval),
+        id: 'Air Pollution',
+        data: piedata,
+         labelAccessorFn: (Task row, _) => '${row.taskvalue}',
       ),
     );
   }
@@ -80,6 +101,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _seriesData = List<charts.Series<Pollution, String>>();
+    _seriesPieData = List<charts.Series<Task, String>>();
 
     _generateData();
   }
@@ -88,7 +110,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.redAccent,
@@ -96,13 +118,13 @@ class _HomePageState extends State<HomePage> {
             bottom: TabBar(
               indicatorColor: Color(0xff9962D0),
               tabs: [
-                Tab(
-                  icon: Icon(FontAwesomeIcons.solidChartBar),
-                ),
+                Tab(icon: Icon(FontAwesomeIcons.chartLine),),
+                Tab(icon: Icon(FontAwesomeIcons.solidChartBar)),
                 Tab(icon: Icon(FontAwesomeIcons.chartPie)),
+
               ],
             ),
-            title: Text('Grafico de burbuja'),
+            title: Text('Visualizacion de la informacion '),
           ),
           body: TabBarView(children: [
             Padding(
@@ -145,6 +167,44 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+                            Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Container(
+                  child: Center(
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                            'Grafico circular',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
+                            SizedBox(height: 10.0,),
+                        Expanded(
+                          child: charts.PieChart(
+                            _seriesPieData,
+                            animate: true,
+                            animationDuration: Duration(seconds: 5),
+                             behaviors: [
+                            new charts.DatumLegend(
+                              outsideJustification: charts.OutsideJustification.endDrawArea,
+                              horizontalFirst: false,
+                              desiredMaxRows: 2,
+                              cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
+                              entryTextStyle: charts.TextStyleSpec(
+                                  color: charts.MaterialPalette.purple.shadeDefault,
+                                  fontFamily: 'Georgia',
+                                  fontSize: 11),
+                            )
+                          ],
+                           defaultRenderer: new charts.ArcRendererConfig(
+                              arcWidth: 100,
+                             arcRendererDecorators: [
+          new charts.ArcLabelDecorator(
+              labelPosition: charts.ArcLabelPosition.inside)
+        ])),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
 
 
 
@@ -177,4 +237,12 @@ class Pollution {
   int quantity;
 
   Pollution(this.year, this.place, this.quantity);
+}
+
+class Task {
+  String task;
+  double taskvalue;
+  Color colorval;
+
+  Task(this.task, this.taskvalue, this.colorval);
 }
