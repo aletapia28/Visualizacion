@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class HomePage extends StatefulWidget {
   final Widget child;
 
@@ -10,10 +11,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List  _seriesData = List<charts.Series<Pollution, String>>();
+  List _seriesData = List<charts.Series<Pollution, String>>();
 
-    _generateData(){
-      var data3 = [
+  _generateData() {
+    var data3 = [
       new Pollution(1985, 'USAFFF', 200),
       new Pollution(1980, 'Asia', 300),
       new Pollution(1985, 'Europe', 180),
@@ -29,10 +30,10 @@ class _HomePageState extends State<HomePage> {
         fillColorFn: (Pollution pollution, _) =>
             charts.ColorUtil.fromDartColor(Color(0xffff9900)),
       ),
-     );
-    }
+    );
+  }
 
- static List<charts.Series<LinearSales, int>> _createSampleData() {
+  static List<charts.Series<LinearSales, int>> _createSampleData() {
     final data = [
       new LinearSales(0, 5, 3.0),
       new LinearSales(10, 25, 5.0),
@@ -75,13 +76,8 @@ class _HomePageState extends State<HomePage> {
     ];
   }
 
-
-  
-
-
   @override
   void initState() {
-    
     super.initState();
     _seriesData = List<charts.Series<Pollution, String>>();
 
@@ -90,10 +86,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(
-      home: DefaultTabController(
-        length: 1,
-        child: Scaffold(
+    return MaterialApp(
+        home: DefaultTabController(
+      length: 2,
+      child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.redAccent,
             //backgroundColor: Color(0xff308e1c),
@@ -103,41 +99,63 @@ class _HomePageState extends State<HomePage> {
                 Tab(
                   icon: Icon(FontAwesomeIcons.solidChartBar),
                 ),
+                Tab(icon: Icon(FontAwesomeIcons.chartPie)),
               ],
             ),
-            title: Text('Grafico de burbuja'),            
+            title: Text('Grafico de burbuja'),
           ),
-          body: 
-          TabBarView(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(8),
+          body: TabBarView(children: [
+            Padding(
+              padding: EdgeInsets.all(8),
+              child: Container(
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Text("data"),
+                      Expanded(
+                          child: charts.ScatterPlotChart(
+                        _createSampleData(),
+                        animate: true,
+                        // barGroupingType: charts.BarGroupingType.grouped,
+                      )),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            
+            Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Container(
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        Text("data"
-                        ),
-
+                        Text(
+                            'SO₂ emissions, by world region (in million tonnes)',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
                         Expanded(
-                          child: charts.ScatterPlotChart(
-                            _createSampleData(),
+                          child: charts.BarChart(
+                            _seriesData,
                             animate: true,
-                            // barGroupingType: charts.BarGroupingType.grouped,
-                          )
+                            barGroupingType: charts.BarGroupingType.grouped,
+                            //behaviors: [new charts.SeriesLegend()],
+                            animationDuration: Duration(seconds: 5),
                           ),
-
-                    ],
                         ),
-                  ) ,),)
-            ]
-            )
-        ),
-    )
-    );
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+
+
+
+
+          ])),
+    ));
   }
 }
-
 
 class LinearSales {
   final int year;
