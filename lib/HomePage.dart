@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
   List _datos = List<charts.Series<Poblacion, String>>();
 
   Data data = new Data();
+
   _generateData() {
     var data3 = [
       new Pollution(1985, 'USAFFF', 200),
@@ -139,8 +140,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Expanded(
                           child: charts.ScatterPlotChart(
-                         Data.createDataBubble(),
-                        
+                         Data.createDataBubble(),                        
                         animate: true,
                         // barGroupingType: charts.BarGroupingType.grouped,
                       )),
@@ -162,11 +162,12 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Expanded(
                         child: charts.BarChart(
-                          _datos,
+                          Data.createDataBars(),
                           animate: true,
-                          barGroupingType: charts.BarGroupingType.grouped,
+                          barGroupingType: charts.BarGroupingType.stacked,
+                          barRendererDecorator: new charts.BarLabelDecorator<String>(),
                           //behaviors: [new charts.SeriesLegend()],
-                          animationDuration: Duration(seconds: 5),
+                          // animationDuration: Duration(seconds: 5),
                         ),
                       ),
                     ],
