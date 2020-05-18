@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
       length: 3,
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.teal,
+            backgroundColor: Colors.tealAccent,
             //backgroundColor: Color(0xff308e1c),
             bottom: TabBar(
               indicatorColor: Color(0xff9962D0),
