@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'data.dart';
+
 class HomePage extends StatefulWidget {
   final Widget child;
 
@@ -93,16 +94,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
-
   @override
-  void initState() {
-    super.initState();
-    _seriesData = List<charts.Series<Pollution, String>>();
-    _seriesPieData = List<charts.Series<Task, String>>();
+  // void initState() {
+  //   super.initState();
+  //   _seriesData = List<charts.Series<Pollution, String>>();
+  //   _seriesPieData = List<charts.Series<Task, String>>();
 
-    _generateData();
-  }
+  //   _generateData();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +110,7 @@ class _HomePageState extends State<HomePage> {
       length: 3,
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.teal,
+            backgroundColor: Colors.redAccent,
             //backgroundColor: Color(0xff308e1c),
             bottom: TabBar(
               indicatorColor: Color(0xff9962D0),
@@ -139,8 +138,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Expanded(
                           child: charts.ScatterPlotChart(
-                         Data.createDataBubble(),
-                        
+                        Data.createDataBubble(),
+
                         animate: true,
                         // barGroupingType: charts.BarGroupingType.grouped,
                       )),
