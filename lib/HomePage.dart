@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'data.dart';
+
 class HomePage extends StatefulWidget {
   final Widget child;
 
@@ -12,13 +13,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<charts.Series<Task, String>> _seriesPieData;
-
-  List _datos = List<charts.Series<Poblacion, String>>();
-
   Data data = new Data();
 
   _generateData() {
-
     var piedata = [
       new Task('Work', 35.8, Color(0xff3366cc)),
       new Task('Eat', 8.3, Color(0xff990099)),
@@ -27,8 +24,6 @@ class _HomePageState extends State<HomePage> {
       new Task('Sleep', 19.2, Color(0xffff9900)),
       new Task('Other', 10.3, Color(0xffdc3912)),
     ];
-
- 
 
     _seriesPieData.add(
       charts.Series(
@@ -41,10 +36,7 @@ class _HomePageState extends State<HomePage> {
         labelAccessorFn: (Task row, _) => '${row.taskvalue}',
       ),
     );
-
   }
-
-
 
   @override
   void initState() {
@@ -61,7 +53,7 @@ class _HomePageState extends State<HomePage> {
       length: 3,
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.tealAccent,
+            backgroundColor: Colors.teal,
             bottom: TabBar(
               indicatorColor: Color(0xff9962D0),
               tabs: [
@@ -88,10 +80,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Expanded(
                           child: charts.ScatterPlotChart(
-                         Data.createDataBubble(),                        
+                        Data.createDataBubble(),
                         animate: true,
                         animationDuration: Duration(seconds: 1),
-
                       )),
                     ],
                   ),
@@ -114,8 +105,9 @@ class _HomePageState extends State<HomePage> {
                           Data.createDataBars(),
                           animate: true,
                           barGroupingType: charts.BarGroupingType.stacked,
-                          barRendererDecorator: new charts.BarLabelDecorator<String>(),
-                           animationDuration: Duration(seconds: 1),
+                          barRendererDecorator:
+                              new charts.BarLabelDecorator<String>(),
+                          animationDuration: Duration(seconds: 1),
                         ),
                       ),
                     ],
@@ -138,39 +130,31 @@ class _HomePageState extends State<HomePage> {
                         height: 10.0,
                       ),
                       Expanded(
-                        child: charts.LineChart(
+                        child: charts.PieChart(
                           Data.createDataPie(),
-                            animate: true,
-                            animationDuration: Duration(seconds: 5),
-                             defaultRenderer:
-                             new charts.LineRendererConfig(includeArea: false, stacked: false),
-                            //  behaviors: [
-                            //    charts.RangeAnnotation(new charts.RangeAnnotationSegment(2,3, measure))
-                            //  ],
-                            // behaviors: [
-                            //   new charts.DatumLegend(
-                            //     outsideJustification:
-                            //         charts.OutsideJustification.endDrawArea,
-                            //     horizontalFirst: false,
-                            //     desiredMaxRows: 2,
-                            //     cellPadding: new EdgeInsets.only(
-                            //         right: 4.0, bottom: 4.0),
-                            //     entryTextStyle: charts.TextStyleSpec(
-                            //         color: charts
-                            //             .MaterialPalette.purple.shadeDefault,
-                            //         fontFamily: 'Georgia',
-                            //         fontSize: 11),
-                            //   )
-                            // ],
-
-                            // defaultRenderer: new charts.ArcRendererConfig(
-                            //     arcWidth: 100,
-                            //     arcRendererDecorators: [
-                            //       new charts.ArcLabelDecorator(
-                            //           labelPosition:
-                            //               charts.ArcLabelPosition.inside)
-                            //     ])
-                                ),
+                          animate: true,
+                          animationDuration: Duration(seconds: 3),
+                          behaviors: [
+                            new charts.DatumLegend(
+                              outsideJustification:
+                                  charts.OutsideJustification.endDrawArea,
+                              horizontalFirst: false,
+                              desiredMaxRows: 2,
+                              cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
+                              entryTextStyle: charts.TextStyleSpec(
+                                  color: charts.MaterialPalette.deepOrange.shadeDefault,
+                                  fontFamily: 'Georgia',
+                                  fontSize: 14),
+                            )
+                          ],
+                          defaultRenderer: new charts.ArcRendererConfig(
+                              arcWidth: 100,                              
+                              arcRendererDecorators: [
+                                new charts.ArcLabelDecorator(
+                                    labelPosition:
+                                        charts.ArcLabelPosition.inside)
+                              ])
+                        ),
                       ),
                     ],
                   ),
@@ -181,8 +165,6 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 }
-
-
 
 class Task {
   String task;
