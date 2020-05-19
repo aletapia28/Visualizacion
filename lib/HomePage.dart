@@ -11,7 +11,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List _seriesData = List<charts.Series<Pollution, String>>();
   List<charts.Series<Task, String>> _seriesPieData;
 
   List _datos = List<charts.Series<Poblacion, String>>();
@@ -19,11 +18,7 @@ class _HomePageState extends State<HomePage> {
   Data data = new Data();
 
   _generateData() {
-    var data3 = [
-      new Pollution(1985, 'USAFFF', 200),
-      new Pollution(1980, 'Asia', 300),
-      new Pollution(1985, 'Europe', 180),
-    ];
+
     var piedata = [
       new Task('Work', 35.8, Color(0xff3366cc)),
       new Task('Eat', 8.3, Color(0xff990099)),
@@ -32,36 +27,8 @@ class _HomePageState extends State<HomePage> {
       new Task('Sleep', 19.2, Color(0xffff9900)),
       new Task('Other', 10.3, Color(0xffdc3912)),
     ];
-    final dataVer = [
-      new Poblacion(7, "Para ver con anteojos", 14471),
-      new Poblacion(22, "Para ver con anteojos", 30661),
-      new Poblacion(44, "Para ver con anteojos", 117509),
-      new Poblacion(62, "Para ver con anteojos", 22374),
-      new Poblacion(69, "Para ver con anteojos", 34089),
-      new Poblacion(82, "Para ver con anteojos", 28368),
-      new Poblacion(90, "Para ver con anteojos", 3992),
-    ];
-    final dataOir = [
-      new Poblacion(7, "Para oir", 3339),
-      new Poblacion(22, "Para oir", 4983),
-      new Poblacion(44, "Para oir", 20643),
-      new Poblacion(62, "Para oir", 5409),
-      new Poblacion(69, "Para oir", 12858),
-      new Poblacion(82, "Para oir", 19258),
-      new Poblacion(90, "Para oir", 4219),
-    ];
 
-    _seriesData.add(
-      charts.Series(
-        domainFn: (Pollution pollution, _) => pollution.place,
-        measureFn: (Pollution pollution, _) => pollution.quantity,
-        id: '2019',
-        data: data3,
-        fillPatternFn: (_, __) => charts.FillPatternType.solid,
-        fillColorFn: (Pollution pollution, _) =>
-            charts.ColorUtil.fromDartColor(Color(0xffff9900)),
-      ),
-    );
+ 
 
     _seriesPieData.add(
       charts.Series(
@@ -75,23 +42,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    _datos.add(
-      charts.Series(
-          domainFn: (Poblacion cantidad, _) => cantidad.condicion,
-          measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
-          id: 'Ver',
-          data: dataVer),
-    );
-
-    _datos.add(
-      charts.Series(
-          domainFn: (Poblacion cantidad, _) => cantidad.condicion,
-          measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
-          fillColorFn: (Poblacion cantidad, _) =>
-              charts.ColorUtil.fromDartColor(Color(0xffff9900)),
-          id: 'Oir',
-          data: dataOir),
-    );
   }
 
 
@@ -99,7 +49,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _seriesData = List<charts.Series<Pollution, String>>();
     _seriesPieData = List<charts.Series<Task, String>>();
 
     _generateData();
@@ -113,7 +62,6 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.tealAccent,
-            //backgroundColor: Color(0xff308e1c),
             bottom: TabBar(
               indicatorColor: Color(0xff9962D0),
               tabs: [
@@ -142,7 +90,8 @@ class _HomePageState extends State<HomePage> {
                           child: charts.ScatterPlotChart(
                          Data.createDataBubble(),                        
                         animate: true,
-                        // barGroupingType: charts.BarGroupingType.grouped,
+                        animationDuration: Duration(seconds: 1),
+
                       )),
                     ],
                   ),
@@ -166,8 +115,7 @@ class _HomePageState extends State<HomePage> {
                           animate: true,
                           barGroupingType: charts.BarGroupingType.stacked,
                           barRendererDecorator: new charts.BarLabelDecorator<String>(),
-                          //behaviors: [new charts.SeriesLegend()],
-                          // animationDuration: Duration(seconds: 5),
+                           animationDuration: Duration(seconds: 1),
                         ),
                       ),
                     ],
@@ -190,31 +138,39 @@ class _HomePageState extends State<HomePage> {
                         height: 10.0,
                       ),
                       Expanded(
-                        child: charts.PieChart(_seriesPieData,
+                        child: charts.LineChart(
+                          Data.createDataPie(),
                             animate: true,
                             animationDuration: Duration(seconds: 5),
-                            behaviors: [
-                              new charts.DatumLegend(
-                                outsideJustification:
-                                    charts.OutsideJustification.endDrawArea,
-                                horizontalFirst: false,
-                                desiredMaxRows: 2,
-                                cellPadding: new EdgeInsets.only(
-                                    right: 4.0, bottom: 4.0),
-                                entryTextStyle: charts.TextStyleSpec(
-                                    color: charts
-                                        .MaterialPalette.purple.shadeDefault,
-                                    fontFamily: 'Georgia',
-                                    fontSize: 11),
-                              )
-                            ],
-                            defaultRenderer: new charts.ArcRendererConfig(
-                                arcWidth: 100,
-                                arcRendererDecorators: [
-                                  new charts.ArcLabelDecorator(
-                                      labelPosition:
-                                          charts.ArcLabelPosition.inside)
-                                ])),
+                             defaultRenderer:
+                             new charts.LineRendererConfig(includeArea: false, stacked: false),
+                            //  behaviors: [
+                            //    charts.RangeAnnotation(new charts.RangeAnnotationSegment(2,3, measure))
+                            //  ],
+                            // behaviors: [
+                            //   new charts.DatumLegend(
+                            //     outsideJustification:
+                            //         charts.OutsideJustification.endDrawArea,
+                            //     horizontalFirst: false,
+                            //     desiredMaxRows: 2,
+                            //     cellPadding: new EdgeInsets.only(
+                            //         right: 4.0, bottom: 4.0),
+                            //     entryTextStyle: charts.TextStyleSpec(
+                            //         color: charts
+                            //             .MaterialPalette.purple.shadeDefault,
+                            //         fontFamily: 'Georgia',
+                            //         fontSize: 11),
+                            //   )
+                            // ],
+
+                            // defaultRenderer: new charts.ArcRendererConfig(
+                            //     arcWidth: 100,
+                            //     arcRendererDecorators: [
+                            //       new charts.ArcLabelDecorator(
+                            //           labelPosition:
+                            //               charts.ArcLabelPosition.inside)
+                            //     ])
+                                ),
                       ),
                     ],
                   ),
@@ -226,29 +182,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class LinearSales {
-  final int year;
-  final int sales;
-  final double radius;
 
-  LinearSales(this.year, this.sales, this.radius);
-}
-
-class Poblacion {
-  int edad;
-  String condicion;
-  int cantidad;
-
-  Poblacion(this.edad, this.condicion, this.cantidad);
-}
-
-class Pollution {
-  String place;
-  int year;
-  int quantity;
-
-  Pollution(this.year, this.place, this.quantity);
-}
 
 class Task {
   String task;

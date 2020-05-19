@@ -185,7 +185,83 @@ class Data {
       ),
     ];
   }
+
+
+  static List<charts.Series<Poblacion, int>> createDataPie() {
+
+     return [
+      new charts.Series<Poblacion, int>(
+        id: 'Discapacidad para ver',
+        colorFn: (Poblacion poblacion, _) {
+          return charts.MaterialPalette.red.shadeDefault;
+        },
+        domainFn: (Poblacion cantidad, _) => cantidad.edad,
+        measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
+        data: dataVer,
+        labelAccessorFn: (Poblacion poblacion, _) => '${poblacion.cantidad}',
+
+
+      ),
+      new charts.Series<Poblacion, int>(
+        id: 'Discapacidad para oir',
+        colorFn: (Poblacion poblacion, _) {
+          return charts.MaterialPalette.blue.shadeDefault;
+        },
+        domainFn: (Poblacion cantidad, _) => cantidad.edad,
+        measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
+        data: dataOir,
+
+      ),
+      new charts.Series<Poblacion, int>(
+        id: 'Discapacidad para hablar',
+        colorFn: (Poblacion poblacion, _) {
+          return charts.MaterialPalette.cyan.shadeDefault;
+        },
+        domainFn: (Poblacion cantidad, _) => cantidad.edad,
+        measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
+        data: dataHablar,
+      ),
+      new charts.Series<Poblacion, int>(
+        id: 'Discapacidad para Caminar',
+        colorFn: (Poblacion poblacion, _) {
+          return charts.MaterialPalette.deepOrange.shadeDefault;
+        },
+        domainFn: (Poblacion cantidad, _) => cantidad.edad,
+        measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
+        data: dataCaminar,
+      ),
+      new charts.Series<Poblacion, int>(
+        id: 'Discapacidad para mover los brazos',
+        colorFn: (Poblacion poblacion, _) {
+          return charts.MaterialPalette.yellow.shadeDefault;
+        },
+        domainFn: (Poblacion cantidad, _) => cantidad.edad,
+        measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
+        data: dataBrazos,
+      ),
+      new charts.Series<Poblacion, int>(
+        id: 'Discapacidad Intelectual',
+        colorFn: (Poblacion poblacion, _) {
+          return charts.MaterialPalette.green.shadeDefault;
+        },
+        domainFn: (Poblacion cantidad, _) => cantidad.edad,
+        measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
+        data: dataIntelectual,
+      ),
+      new charts.Series<Poblacion, int>(
+        id: 'Discapacidad mental',
+        colorFn: (Poblacion poblacion, _) {
+          return charts.MaterialPalette.purple.shadeDefault;
+        },
+        domainFn: (Poblacion cantidad, _) => cantidad.edad,
+        measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
+        data: dataMental,
+      ),
+    ];
+  }
 }
+
+  
 
 class Poblacion {
   int edad;
