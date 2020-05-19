@@ -135,6 +135,7 @@ class _HomePageState extends State<HomePage> {
                           animate: true,
                           animationDuration: Duration(seconds: 3),
                           behaviors: [
+
                             new charts.DatumLegend(
                               outsideJustification:
                                   charts.OutsideJustification.endDrawArea,
