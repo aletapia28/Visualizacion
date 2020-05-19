@@ -39,13 +39,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  // void initState() {
-  //   super.initState();
-  //   _seriesData = List<charts.Series<Pollution, String>>();
-  //   _seriesPieData = List<charts.Series<Task, String>>();
+  void initState() {
+    super.initState();
+    _seriesPieData = List<charts.Series<Task, String>>();
 
-  //   _generateData();
-  // }
+    _generateData();
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +53,7 @@ class _HomePageState extends State<HomePage> {
       length: 3,
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.redAccent,
-            //backgroundColor: Color(0xff308e1c),
+            backgroundColor: Colors.teal,
             bottom: TabBar(
               indicatorColor: Color(0xff9962D0),
               tabs: [
@@ -76,9 +74,9 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        "Grafico de Burbujas",
+                        "Cantidad de personas según su edad y condición ",
                         style: TextStyle(
-                            fontSize: 24.0, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Expanded(
                           child: charts.ScatterPlotChart(
@@ -98,9 +96,9 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        'Grafico de barras',
+                        'Cantidad de personas según su edad y condición',
                         style: TextStyle(
-                            fontSize: 24.0, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Expanded(
                         child: charts.BarChart(
@@ -124,9 +122,9 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        'Grafico circular',
+                        'Cantidad de personas con discapacidad visual según su edad',
                         style: TextStyle(
-                            fontSize: 24.0, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: 10.0,
