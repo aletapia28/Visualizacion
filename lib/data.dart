@@ -82,13 +82,14 @@ class Data {
     new Poblacion(82, "Tipo Mental", 3514,Color(0xff109618)),
     new Poblacion(90, "Tipo Mental", 713,Color(0xff109618)),
   ];
+  
 
   static List<charts.Series<Poblacion, String>> createDataBars() {
     return [
       new charts.Series<Poblacion, String>(
           id: 'Discapacidad para ver',
           colorFn: (Poblacion poblacion, _) {
-            return charts.MaterialPalette.cyan.shadeDefault;
+            return charts.ColorUtil.fromDartColor(Color(0xff3366cc));
           },
           domainFn: (Poblacion cantidad, _) => cantidad.condicion,
           measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
@@ -98,7 +99,7 @@ class Data {
       new charts.Series<Poblacion, String>(
         id: 'Discapacidad para oir',
         colorFn: (Poblacion poblacion, _) {
-          return charts.MaterialPalette.blue.shadeDefault;
+          return charts.ColorUtil.fromDartColor(Color(0xffff9900));
         },
         domainFn: (Poblacion cantidad, _) => cantidad.condicion,
         measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
@@ -109,7 +110,7 @@ class Data {
       new charts.Series<Poblacion, String>(
         id: 'Discapacidad para caminar',
         colorFn: (Poblacion poblacion, _) {
-          return charts.MaterialPalette.deepOrange.shadeDefault;
+          return charts.ColorUtil.fromDartColor(Color(0xff990099));
         },
         domainFn: (Poblacion cantidad, _) => cantidad.condicion,
         measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
