@@ -10,9 +10,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
-      title: 'Visualizacion de la informacion ',
+      title: 'Personas con discapacidad en Costa Rica ',
       theme: ThemeData(
-        primaryColor: Colors.red,
+        primaryColor: Colors.indigo,
       ),
       home: HomePage(),
     );

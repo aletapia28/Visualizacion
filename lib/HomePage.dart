@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 Tab(icon: Icon(FontAwesomeIcons.chartPie)),
               ],
             ),
-            title: Text('Visualizacion de la informacion '),
+            title: Text('Personas con discapacidad en Costa Rica '),
           ),
           body: TabBarView(children: [
             Padding(
@@ -74,15 +74,16 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        "Cantidad de personas según su edad y condición ",
+                        "Total de personas según su edad y condición ",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Raleway'),
+                            textAlign: TextAlign.center,
                       ),
                       Expanded(
                           child: charts.ScatterPlotChart(
                         Data.createDataBubble(),
                         animate: true,
-                        animationDuration: Duration(seconds: 1),
+                        animationDuration: Duration(seconds: 2),
                       )),
                     ],
                   ),
@@ -98,7 +99,8 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         'Cantidad de personas según su edad y condición',
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold,fontFamily: 'Raleway'),
+                            textAlign: TextAlign.center,
                       ),
                       Expanded(
                         child: charts.BarChart(
@@ -124,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         'Cantidad de personas con discapacidad visual según su edad',
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Raleway'),
                       ),
                       SizedBox(
                         height: 10.0,
@@ -144,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                               cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
                               entryTextStyle: charts.TextStyleSpec(
                                   color: charts.MaterialPalette.deepOrange.shadeDefault,
-                                  fontFamily: 'Georgia',
+                                  fontFamily: 'Raleway',
                                   fontSize: 14),
                             )
                           ],
