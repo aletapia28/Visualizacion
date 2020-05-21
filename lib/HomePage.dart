@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                           child: charts.ScatterPlotChart(
                         Data.createDataBubble(),
                         animate: true,
-                        animationDuration: Duration(seconds: 2),
+                        animationDuration: Duration(seconds: 3),
                       )),
                     ],
                   ),
@@ -127,6 +127,7 @@ class _HomePageState extends State<HomePage> {
                         'Cantidad de personas con discapacidad visual según su edad',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Raleway'),
+                            textAlign: TextAlign.center,
                       ),
                       SizedBox(
                         height: 10.0,
