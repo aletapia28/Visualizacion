@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
       length: 3,
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.teal,
+            backgroundColor: Colors.indigo,
             bottom: TabBar(
               indicatorColor: Color(0xff9962D0),
               tabs: [
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 Tab(icon: Icon(FontAwesomeIcons.chartPie)),
               ],
             ),
-            title: Text('Personas con discapacidad en Costa Rica '),
+            title: Text('Personas con discapacidad en CR '),
           ),
           body: TabBarView(children: [
             Padding(
