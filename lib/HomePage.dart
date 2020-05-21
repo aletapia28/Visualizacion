@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        'Cantidad de personas según su edad y condición',
+                        'Total de personas según su edad y condición',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold,fontFamily: 'Raleway'),
                             textAlign: TextAlign.center,
