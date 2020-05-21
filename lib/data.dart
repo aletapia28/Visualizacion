@@ -9,7 +9,7 @@ class Data {
     new Poblacion(22, "Para ver con anteojos", 30661,Color(0xff3366cc)),
     new Poblacion(44, "Para ver con anteojos", 117509,Color(0xff109618)),
     new Poblacion(62, "Para ver con anteojos", 22374, Color(0xfffdbe19)),
-    new Poblacion(69, "Para ver con anteojos", 34089,Color(0xffff9900)),
+    new Poblacion(69, "Para ver con anteojos", 34089,Color(0xffff8800)),
     new Poblacion(82, "Para ver con anteojos", 28368,Color(0xffdc3912)),
     new Poblacion(90, "Para ver con anteojos", 3992,Color(0xffff00ff)),
   ];
@@ -99,7 +99,7 @@ class Data {
       new charts.Series<Poblacion, String>(
         id: 'Discapacidad para oir',
         colorFn: (Poblacion poblacion, _) {
-          return charts.ColorUtil.fromDartColor(Color(0xffff9900));
+          return charts.ColorUtil.fromDartColor(Color(0xffff8800));
         },
         domainFn: (Poblacion cantidad, _) => cantidad.condicion,
         measureFn: (Poblacion cantidad, _) => cantidad.cantidad,
