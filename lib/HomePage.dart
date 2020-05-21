@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        "Total de personas según su edad y condición ",
+                        "Total de personas con discapacidad según su edad ",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Raleway'),
                             textAlign: TextAlign.center,
@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                               desiredMaxRows: 2,
                               cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
                               entryTextStyle: charts.TextStyleSpec(
-                                  color: charts.MaterialPalette.deepOrange.shadeDefault,
+                                  color: charts.MaterialPalette.gray.shadeDefault,
                                   fontFamily: 'Raleway',
                                   fontSize: 14),
                             )
